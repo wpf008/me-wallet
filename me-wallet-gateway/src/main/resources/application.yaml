@@ -1,0 +1,31 @@
+server:
+  port: 9300
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 95fc64fb-aea7-48d3-a890-d17860d5b132
+        group: dev
+        username: nacos
+        password: nacos
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      routes:
+        - id: account
+          uri: lb://account
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
+        - id: asset
+          uri: lb://asset
+          predicates:
+            - Path=/asset/**
+          filters:
+            - StripPrefix=1

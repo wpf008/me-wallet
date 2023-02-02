@@ -1,0 +1,11 @@
+server:
+  port: 9200
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 95fc64fb-aea7-48d3-a890-d17860d5b132
+        group: dev
+  application:
+    name: asset
