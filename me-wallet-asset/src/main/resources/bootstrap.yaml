@@ -1,0 +1,34 @@
+server:
+  port: 9200
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 95fc64fb-aea7-48d3-a890-d17860d5b132
+        group: dev
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 95fc64fb-aea7-48d3-a890-d17860d5b132
+        group: dev
+        file-extension: yaml
+  application:
+    name: asset
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      account:
+        registerHealthIndicator: true
+        slidingWindowSize: 7
+        slidingWindowType: COUNT_BASED
+        waitDurationInOpenState: 5000
+        permittedNumberOfCallsInHalfOpenState: 6
+feign:
+  client:
+    config:
+      default:
+        readTimeout: 1000
+        connectTimeout: 1000
+  circuitbreaker:
+    enabled: true
